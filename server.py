@@ -39,10 +39,25 @@ class MyObject(Resource):
 class Trip(Resource):
 
     def post(self):
-        return None
+        new_trip = request.json
+        trip_collection = app.db.trips
+        result = trip_collection.insert_one(new_trip)
+
+        trip = trip_collection.find_one(
+            {"_id": ObjectId(result.inserted_id)})
+
+        return trip
 
     def get(self, trip_id):
-        return None
+        trip_collection = app.db.trips
+        trip = trip_collection.find_one({"_id": ObjectId(trip_id)})
+
+        if trip is None:
+            response = jsonify(data=[])
+            response.status_code = 404
+            return response
+        else:
+            return trip
 
 
 class User(Resource):
