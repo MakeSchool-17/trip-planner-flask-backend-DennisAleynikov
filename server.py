@@ -36,6 +36,23 @@ class MyObject(Resource):
             return myobject
 
 
+class Trip(Resource):
+
+    def post(self):
+        return None
+
+    def get(self, trip_id):
+        return None
+
+
+class User(Resource):
+
+    def post(self):
+        return None
+
+    def get(self, user_id):
+        return None
+
 # Add REST resource to API
 api.add_resource(MyObject, '/myobject/', '/myobject/<string:myobject_id>')
 
@@ -49,6 +66,5 @@ def output_json(data, code, headers=None):
 
 if __name__ == '__main__':
     # Turn this on in debug mode to get detailed information
-    # about request related exceptions: http://flask.pocoo.org/docs/0.10/config/
     app.config['TRAP_BAD_REQUEST_ERRORS'] = True
     app.run(debug=True)
